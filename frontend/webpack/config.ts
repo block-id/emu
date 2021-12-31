@@ -1,10 +1,10 @@
 import * as path from 'path';
-import * as webpack from "webpack";
+import * as webpack from 'webpack';
 // import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const config: webpack.Configuration = {
-	devtool: 'source-map',
-	mode: 'development',
+  devtool: 'source-map',
+  mode: 'development',
   module: {
     rules: [
       {
@@ -36,10 +36,7 @@ const config: webpack.Configuration = {
     ],
   },
   output: {
-    path: path.resolve(
-      __dirname,
-      '../../backend/static/js/build/'
-    ),
+    path: path.resolve(__dirname, '../../backend/static/js/build/'),
     filename: '[name].build.js',
   },
 
@@ -50,7 +47,7 @@ const config: webpack.Configuration = {
     //     files: "./src/**/*",
     //   },
     // }),
-  ]
+  ],
 };
 
 export default config;

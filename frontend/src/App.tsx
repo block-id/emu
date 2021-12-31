@@ -1,7 +1,7 @@
 import React from 'react';
 
-const App: React.FC = () => {
-  return <p>Hello world!</p>;
-};
+import Test from 'pages/Test';
+
+const App: React.FC = () => <Test />;
 
 export default App;

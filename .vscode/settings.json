@@ -1,6 +1,8 @@
 {
     "typescript.tsdk": "frontend/node_modules/typescript/lib",
     "eslint.options": {
-        "configFile": "frontend/.eslinterc.json"
+        "overrideConfigFile": "frontend/.eslintrc.json"
     },
+    "eslint.format.enable": true,
+    "editor.formatOnSave": true
 }
