@@ -1,9 +1,10 @@
 {% extends "common/base.html" %}
+{% load static %}
 
 {% block body %}
 <div id="root"></div>
 {% endblock %}
 
 {% block js %}
-<!-- Add JS build script ehre -->
+<script src="{% static 'js/build/main.build.js' %}"></script>
 {% endblock %}

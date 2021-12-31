@@ -1,0 +1,6 @@
+{
+    "typescript.tsdk": "frontend/node_modules/typescript/lib",
+    "eslint.options": {
+        "configFile": "frontend/.eslinterc.json"
+    },
+}
