@@ -5,5 +5,14 @@ from core import views
 app_name = "core"
 
 urlpatterns = [
-    path("test/", views.test),
+    path(
+        "api/register/",
+        views.register.RegisterView.as_view(),
+        name="register",
+    ),
+    path(
+        "api/login/",
+        views.login.LoginView.as_view(),
+        name="login",
+    ),
 ]
