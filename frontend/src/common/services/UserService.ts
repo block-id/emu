@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse, AxiosError } from 'axios';
+import Axios from 'axios';
 
 import { USER_API_URL } from 'common/constants';
 import BaseService from './BaseService';

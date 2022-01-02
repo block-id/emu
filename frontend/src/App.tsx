@@ -9,7 +9,7 @@ import Login from 'apps/auth/pages/login/Login';
 import Credentials from 'apps/credentials/Credentials';
 
 const App: React.FC = () => {
-  const [user, setUser] = useUser();
+  const [user] = useUser();
 
   return (
     user === undefined
