@@ -6,21 +6,25 @@ import {
 import Auth from 'apps/auth/Auth';
 import { useUser } from 'common/providers/user-provider/UserProvider';
 import Login from 'apps/auth/pages/login/Login';
+import Credentials from 'apps/credentials/Credentials';
 
 const App: React.FC = () => {
-  const [user, setUser, isLoaded] = useUser();
+  const [user, setUser] = useUser();
 
   return (
-    !isLoaded ? <p>Replace me with a nice loading screen...</p> : (
-      <BrowserRouter>
-        <Routes>
-          <Route path="auth" element={<Auth />}>
-            <Route index element={<Login />} />
-          </Route>
-          {isLoaded && !user && <Route path="" element={<Navigate to="auth" />} /> }
-        </Routes>
-      </BrowserRouter>
-    )
+    user === undefined
+      ? <p>Replace me with a nice loading screen...</p>
+      : (
+        <BrowserRouter>
+          <Routes>
+            <Route path="auth" element={<Auth />}>
+              <Route index element={<Login />} />
+            </Route>
+            {user && <Route path="" element={<Credentials />} />}
+            {user === null && <Route path="" element={<Navigate to="auth" />} /> }
+          </Routes>
+        </BrowserRouter>
+      )
   );
 };
 

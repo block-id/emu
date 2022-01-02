@@ -1,7 +1,6 @@
 type UserContext = [
-  IUser | undefined,
-  React.Dispatch<React.SetStateAction<IUser | undefined>>,
-  boolean,
+  IUser | undefined | null,
+  React.Dispatch<React.SetStateAction<UserContext['0']>>,
 ];
 
 interface IUser {

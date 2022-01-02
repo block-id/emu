@@ -8,17 +8,16 @@ const userService = new UserService();
 const UserContext = createContext<UserContext | undefined>(undefined);
 
 const UserProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<IUser>();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [user, setUser] = useState<IUser | null>();
 
   useEffect(() => {
     let cancelLoad = false;
 
     userService.getCurrentUser().then((value) => {
-      if (!cancelLoad) { setUser(value); setIsLoaded(true); }
+      if (!cancelLoad) { setUser(value); }
     }).catch((error) => {
       if (error.response.status < 500) {
-        setIsLoaded(true);
+        setUser(null);
       }
     });
 
@@ -29,7 +28,7 @@ const UserProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={[user, setUser, isLoaded]}>
+    <UserContext.Provider value={[user, setUser]}>
       {children}
     </UserContext.Provider>
   );

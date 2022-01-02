@@ -9,8 +9,8 @@ const Auth: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user !== undefined) navigate('/');
-  });
+    if (user) navigate('/');
+  }, [user, navigate]);
 
   return (
     <Container maxWidth="xs">
