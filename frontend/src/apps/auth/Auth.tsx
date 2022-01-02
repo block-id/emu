@@ -1,11 +1,22 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { Container } from '@mui/material';
 
-const Auth: React.FC = () => (
-  <Container maxWidth="xs">
-    <Outlet />
-  </Container>
-);
+import { useUser } from 'common/providers/user-provider/UserProvider';
+
+const Auth: React.FC = () => {
+  const [user] = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user !== undefined) navigate('/');
+  });
+
+  return (
+    <Container maxWidth="xs">
+      <Outlet />
+    </Container>
+  );
+};
 
 export default Auth;
