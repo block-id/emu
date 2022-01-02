@@ -6,8 +6,8 @@ from rest_framework.exceptions import AuthenticationFailed
 
 class LoginView(views.APIView):
     def post(self, request):
-        username = request.POST["username"]
-        password = request.POST["password"]
+        username = request.data.get("username")
+        password = request.data.get("password")
         user = authenticate(
             request,
             username=username,
