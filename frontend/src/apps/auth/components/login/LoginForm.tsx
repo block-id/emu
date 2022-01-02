@@ -2,7 +2,8 @@ import React from 'react';
 import {
   Formik, Form, FormikProps, FormikValues,
 } from 'formik';
-import { Button } from '@mui/material';
+import { Button, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 import FormikTextField from 'common/components/formik/FormikTextField';
 import ErrorMessage from 'common/components/formik/ErrorMessage';
@@ -66,6 +67,7 @@ const LoginForm: React.FC = () => {
           >
             Sign In
           </Button>
+          <Link component={RouterLink} to="register" underline="none">Register instead?</Link>
         </Form>
       )}
     </Formik>
