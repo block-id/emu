@@ -14,7 +14,9 @@ const UserProvider: React.FC = ({ children }) => {
     let cancelLoad = false;
 
     userService.getCurrentUser().then((value) => {
-      if (!cancelLoad) { setUser(value); }
+      if (!cancelLoad) { 
+        setUser(value); 
+      }
     }).catch((error) => {
       if (error.response.status < 500) {
         setUser(null);

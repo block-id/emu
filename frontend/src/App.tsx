@@ -8,13 +8,13 @@ import { useUser } from 'common/providers/user-provider/UserProvider';
 import Login from 'apps/auth/pages/login/Login';
 import Credentials from 'apps/credentials/Credentials';
 import Register from 'apps/auth/pages/register/Register';
+import Loader from 'common/components/Loader';
 
 const App: React.FC = () => {
   const [user] = useUser();
 
   return (
-    user === undefined
-      ? <p>Replace me with a nice loading screen...</p>
+    user === undefined ? <Loader></Loader>
       : (
         <BrowserRouter>
           <Routes>
