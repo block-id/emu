@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 
 import ClipLoader from "react-spinners/ClimbingBoxLoader";
 
-const override = css`
+const Override = css`
   display: block;
   margin: 0 auto;
   vertical-align:center;
@@ -16,14 +16,13 @@ const override = css`
   text-align: center;
 `;
 
+const Color = "#FFB49A";
+const Loading = true;
 
 const Loader = () => {
-  let [color, setColor] = useState("#FFB49A");
-  let [loading, setLoading] = useState(true);
-
   return (
     <div>
-      <ClipLoader color={color} loading = {loading} css={override} size={20}  />
+      <ClipLoader color={Color} loading = {Loading} css={Override} size={20}  />
     </div>
   );
 };
