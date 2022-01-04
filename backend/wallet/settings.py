@@ -23,6 +23,7 @@ DJANGO_APPS = [
 
 WALLET_APPS = [
     "core",
+    "ids",
 ]
 
 THIRD_PARTY_APPS = [
