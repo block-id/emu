@@ -1,0 +1,76 @@
+{
+  "type": "object",
+  "properties": {
+    "idType": { "type": "string" },
+    "issuer": { "$ref": "#/$defs/issuer" },
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/attributeGroup" }
+    }
+  },
+  "required": ["idType", "issuer", "groups"],
+  "additionalProperties": false,
+  "$defs": {
+    "issuer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "publicKey": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        }
+      },
+      "required": ["publicKey", "logo"]
+    },
+    "attributeGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "groupName": {
+              "type": "string"
+            },
+            "attributes": {
+              "type": "object",
+              "additionalProperties": false,
+              "patternProperties": {
+                "^.*$": {
+                  "type": "string"
+                }
+              }
+            },
+            "subject": {
+              "type": "object",
+              "properties": {
+                "publicKey": {
+                  "type": "string"
+                }
+              },
+              "required": ["publicKey"],
+              "additionalProperties": false
+            },
+            "issuer": { "$ref": "#/$defs/issuer" },
+            "issuedAt": { "type": "string" },
+            "expiresAt": { "type": "string" }
+          },
+          "required": [
+            "groupName",
+            "attributes",
+            "subject",
+            "issuer",
+            "issuedAt",
+            "expiresAt"
+          ]
+        },
+        "signature": { "type": "string" }
+      },
+      "required": ["data", "signature"]
+    }
+  }
+}
