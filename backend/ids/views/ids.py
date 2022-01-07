@@ -41,4 +41,6 @@ class IdViewset(
         except JsonValidationError as e:
             error_path = "json." + ".".join(map(str, e.path))
             raise ValidationError(f"{error_path}: {e.message}")
+        except (AssertionError, ValueError) as e:
+            raise ValidationError(str(e))
         return HttpResponse("hi")
