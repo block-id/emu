@@ -1,26 +1,11 @@
 import React from 'react';
-import { useUser } from 'common/providers/user-provider/UserProvider';
-import AuthService from 'apps/auth/services/AuthService';
+import { Container } from '@mui/material';
+import { Outlet } from 'react-router-dom';
 
-const authService = new AuthService();
-const Credentials: React.FC = () => {
-  const [user, setUser] = useUser();
-
-  return (
-    <>
-      <p>Your credentials will be listed here.</p>
-      <button
-        onClick={() => {
-          authService.logout().then(() => {
-            setUser(null);
-          });
-        }}
-        type="button"
-      >
-        Logout
-      </button>
-    </>
-  );
-};
+const Credentials: React.FC = () => (
+  <Container maxWidth="lg">
+    <Outlet />
+  </Container>
+);
 
 export default Credentials;

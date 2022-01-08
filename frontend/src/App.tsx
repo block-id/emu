@@ -9,6 +9,7 @@ import Login from 'apps/auth/pages/login/Login';
 import Credentials from 'apps/credentials/Credentials';
 import Register from 'apps/auth/pages/register/Register';
 import Loader from 'common/components/loader/Loader';
+import IdList from 'apps/credentials/pages/id-list/IdList';
 
 const App: React.FC = () => {
   const [user] = useUser();
@@ -18,11 +19,23 @@ const App: React.FC = () => {
       : (
         <BrowserRouter>
           <Routes>
+            {/* Guest Routes */}
+            {user === null && (
             <Route path="auth" element={<Auth />}>
               <Route index element={<Login />} />
               <Route path="register" element={<Register />} />
             </Route>
-            {user && <Route path="" element={<Credentials />} />}
+            )}
+
+            {/* User Routes */}
+            {user && (
+            <Route path="ids" element={<Credentials />}>
+              <Route index element={<IdList />} />
+            </Route>
+            )}
+
+            {/* Redirects */}
+            {user && <Route path="" element={<Navigate to="ids" />} />}
             {user === null && <Route path="" element={<Navigate to="auth" />} /> }
           </Routes>
         </BrowserRouter>
