@@ -10,6 +10,7 @@ from ids.models import Id
 from ids.serializers.id.create import IdCreateSerializer
 from ids.serializers.id.list import IdListSerializer
 from lib.json_ids.validate import validate_json_id
+from lib.drf.pagination import DefaultPageNumberPagination
 
 
 class IdViewset(
@@ -19,6 +20,7 @@ class IdViewset(
     viewsets.GenericViewSet,
 ):
     permission_classes = [IsAuthenticated]
+    pagination_class = DefaultPageNumberPagination
 
     def get_queryset(self):
         return Id.objects.filter(owner=self.request.user)
