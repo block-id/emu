@@ -41,7 +41,18 @@
               "additionalProperties": false,
               "patternProperties": {
                 "^.*$": {
-                  "type": "string"
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "pattern": "^(string|image)$"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["type", "value"]
                 }
               }
             },
