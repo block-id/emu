@@ -8,6 +8,7 @@ from jsonschema.exceptions import ValidationError as JsonValidationError
 
 from ids.models import Id
 from ids.serializers.id.create import IdCreateSerializer
+from ids.serializers.id.list import IdListSerializer
 from lib.json_ids.validate import validate_json_id
 
 
@@ -24,9 +25,7 @@ class IdViewset(
 
     def get_serializer_class(self):
         if self.action == "list":
-            pass
-        elif self.action == "detail":
-            pass
+            return IdListSerializer
         else:
             return IdCreateSerializer
 
