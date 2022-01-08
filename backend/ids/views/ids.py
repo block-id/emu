@@ -1,12 +1,13 @@
 import json
+from django.http.response import JsonResponse
 
-from django.shortcuts import HttpResponse
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError
 from jsonschema.exceptions import ValidationError as JsonValidationError
 
 from ids.models import Id
+from ids.serializers.id.create import IdCreateSerializer
 from lib.json_ids.validate import validate_json_id
 
 
@@ -27,7 +28,7 @@ class IdViewset(
         elif self.action == "detail":
             pass
         else:
-            pass
+            return IdCreateSerializer
 
     def create(self, request, *args, **kwargs):
         if request.content_type != "application/json":
@@ -36,6 +37,7 @@ class IdViewset(
         else:
             json_id = request.data.get("json")
 
+        # Validation
         try:
             validate_json_id(json_id)
         except JsonValidationError as e:
@@ -43,4 +45,17 @@ class IdViewset(
             raise ValidationError(f"{error_path}: {e.message}")
         except (AssertionError, ValueError) as e:
             raise ValidationError(str(e))
-        return HttpResponse("hi")
+
+        # TODO: Add smart contract validation
+
+        # Create ID
+        serializer = self.get_serializer(
+            data={
+                "owner": request.user.id,
+                "type": json_id["idType"],
+                "verifiable_id": json_id,
+            }
+        )
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return JsonResponse(serializer.data)
