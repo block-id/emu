@@ -1,0 +1,3 @@
+interface IdCardProps {
+  id: Id;
+}

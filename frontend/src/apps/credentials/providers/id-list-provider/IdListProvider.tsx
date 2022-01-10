@@ -27,7 +27,7 @@ const IdListProvider: React.FC = ({ children }) => {
         page: idList.page,
       });
     }).catch((error) => {
-      alert('TODO: Handle exceptions!');
+      alert(`TODO: Handle exceptions! ${error.message}`);
     });
 
     return () => { cancelLoad = true; };
