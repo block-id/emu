@@ -2,6 +2,7 @@
   "type": "object",
   "properties": {
     "idType": { "type": "string" },
+    "idName": { "type": "string" },
     "issuer": { "$ref": "#/$defs/issuer" },
     "groups": {
       "type": "array",
@@ -9,21 +10,26 @@
       "items": { "$ref": "#/$defs/attributeGroup" }
     }
   },
-  "required": ["idType", "issuer", "groups"],
+  "required": ["idType", "idName", "issuer", "groups"],
   "additionalProperties": false,
   "$defs": {
     "issuer": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "publicKey": {
-          "type": "string"
-        },
-        "logo": {
-          "type": "string"
-        }
+        "name": { "type": "string" },
+        "publicKey": { "type": "string" },
+        "logo": { "type": "string" }
       },
-      "required": ["publicKey", "logo"]
+      "required": ["name", "publicKey", "logo"]
+    },
+    "groupIssuer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "publicKey": { "type": "string" }
+      },
+      "required": ["publicKey"]
     },
     "attributeGroup": {
       "type": "object",
@@ -33,9 +39,7 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "groupName": {
-              "type": "string"
-            },
+            "groupName": { "type": "string" },
             "attributes": {
               "type": "object",
               "additionalProperties": false,
@@ -48,9 +52,7 @@
                       "type": "string",
                       "pattern": "^(string|image)$"
                     },
-                    "value": {
-                      "type": "string"
-                    }
+                    "value": { "type": "string" }
                   },
                   "required": ["type", "value"]
                 }
@@ -59,14 +61,12 @@
             "subject": {
               "type": "object",
               "properties": {
-                "publicKey": {
-                  "type": "string"
-                }
+                "publicKey": { "type": "string" }
               },
               "required": ["publicKey"],
               "additionalProperties": false
             },
-            "issuer": { "$ref": "#/$defs/issuer" },
+            "issuer": { "$ref": "#/$defs/groupIssuer" },
             "issuedAt": { "type": "string" },
             "expiresAt": { "type": "string" }
           },
