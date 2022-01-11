@@ -8,12 +8,15 @@ const Card: React.FC<{id: VerifiableId}> = ({ id }) => (
       {
         display: 'flex',
         flexDirection: 'column',
-        width: '600px',
-        minHeight: '300px',
         border: `1px solid ${theme.palette.grey[200]}`,
         marginTop: 2,
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+          width: '600px',
+          minHeight: '300px',
+        },
       }
     )}
   >
@@ -72,8 +75,7 @@ const Card: React.FC<{id: VerifiableId}> = ({ id }) => (
           {
             display: 'flex',
             flexWrap: 'wrap',
-            gap: theme.spacing(0.8),
-            marginTop: 2,
+            gap: theme.spacing(1),
             padding: theme.spacing(2),
           }
         )}
