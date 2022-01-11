@@ -33,7 +33,7 @@ interface AttributeGroup {
     groupName: string;
     attributes: {
       [key: string]: {
-        type: string;
+        type: 'string' | 'image';
         value: string;
       }
     }
