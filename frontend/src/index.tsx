@@ -6,7 +6,19 @@ import { CssBaseline } from '@mui/material';
 import App from 'App';
 import { UserProvider } from 'common/providers/user-provider/UserProvider';
 
-const theme = createTheme();
+const theme = createTheme({
+  components: {
+    MuiAvatar: {
+      styleOverrides: {
+        root: {
+          '.MuiAvatar-img': {
+            objectFit: 'contain',
+          },
+        },
+      },
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>

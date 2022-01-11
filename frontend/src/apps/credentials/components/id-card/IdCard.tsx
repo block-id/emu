@@ -17,6 +17,7 @@ const IdCard: React.FC<IdCardProps> = ({ id }) => (
         flexDirection: 'column',
         width: '100%',
         padding: theme.spacing(1),
+        alignItems: 'center',
       })}
     >
       <Toolbar id={id} />
