@@ -1,5 +1,6 @@
 import json
 from django.http.response import JsonResponse
+from django.db.models import Q
 
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
@@ -23,7 +24,17 @@ class IdViewset(
     pagination_class = DefaultPageNumberPagination
 
     def get_queryset(self):
-        return Id.objects.filter(owner=self.request.user)
+        qs = Id.objects.filter(owner=self.request.user)
+
+        if self.action == "list":
+            query = self.request.GET.get("query")
+            if query:
+                qs = qs.filter(
+                    Q(id_name__icontains=query) | Q(issuer_name__icontains=query)
+                )
+            qs = qs.order_by("-id")
+
+        return qs
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -54,6 +65,8 @@ class IdViewset(
             data={
                 "owner": request.user.id,
                 "type": json_id["idType"],
+                "issuer_name": json_id["issuer"]["name"],
+                "id_name": json_id["idName"],
                 "verifiable_id": json_id,
             }
         )
