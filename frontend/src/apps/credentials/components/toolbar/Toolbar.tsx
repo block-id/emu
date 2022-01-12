@@ -1,10 +1,16 @@
 import React from 'react';
-
 import {
-  AppBar, Toolbar as MuiToolbar, Typography, styled, alpha, InputBase,
+  AppBar,
+  Toolbar as MuiToolbar,
+  Typography,
+  styled,
+  alpha,
+  InputBase,
+  InputBaseProps,
 } from '@mui/material';
-
 import SearchIcon from '@mui/icons-material/Search';
+
+import { useIdList } from 'apps/credentials/providers/id-list-provider/IdListProvider';
 
 const Search = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
@@ -42,25 +48,35 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }));
 
-const Toolbar: React.FC = () => (
-  <AppBar position="static">
-    <MuiToolbar>
-      <Typography
-        variant="h6"
-        component="div"
-        noWrap
-        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-      >
-        Your IDs
-      </Typography>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <SearchInput placeholder="Search" />
-      </Search>
-    </MuiToolbar>
-  </AppBar>
-);
+const Toolbar: React.FC<{
+  onSearch: InputBaseProps['onChange']
+}> = ({ onSearch }) => {
+  const [idList] = useIdList();
+
+  return (
+    <AppBar position="static">
+      <MuiToolbar>
+        <Typography
+          variant="h6"
+          component="div"
+          noWrap
+          sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+        >
+          Your IDs
+        </Typography>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <SearchInput
+            placeholder="Search"
+            onChange={onSearch}
+            defaultValue={idList.query}
+          />
+        </Search>
+      </MuiToolbar>
+    </AppBar>
+  );
+};
 
 export default Toolbar;

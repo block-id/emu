@@ -21,7 +21,10 @@ const IdListProvider: React.FC = ({ children }) => {
 
     let cancelLoad = false;
     // Fetch data
-    idService.listIds({ page: idList.page }).then((response) => {
+    idService.listIds({
+      page: idList.page,
+      query: idList.query || '',
+    }).then((response) => {
       if (cancelLoad) return;
 
       setIdList({

@@ -1,10 +1,13 @@
 import React from 'react';
-import { Box, Container, Pagination } from '@mui/material';
+import {
+  Box, Container, Pagination,
+} from '@mui/material';
 import { UsePaginationProps } from '@mui/material/usePagination';
 
 import IdListProvider, { useIdList } from 'apps/credentials/providers/id-list-provider/IdListProvider';
 import Toolbar from 'apps/credentials/components/toolbar/Toolbar';
 import IdCard from 'apps/credentials/components/id-card/IdCard';
+import debounce from 'common/utils/debounce';
 
 const IdList: React.FC = () => {
   const [idList, setIdList] = useIdList();
@@ -17,6 +20,20 @@ const IdList: React.FC = () => {
       isLoaded: false,
     });
   };
+
+  const handleSearch = debounce(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const query = event.target.value.trim();
+      if (query === idList.query) return;
+
+      setIdList({
+        ...idList,
+        query,
+        page: 1,
+        isLoaded: false,
+      });
+    }, 500,
+  );
 
   return (
     <Container sx={(theme) => ({
@@ -34,7 +51,7 @@ const IdList: React.FC = () => {
         marginTop: 8,
       }}
       >
-        <Toolbar />
+        <Toolbar onSearch={handleSearch} />
         <Box sx={{
           display: 'flex',
           flexDirection: 'column',
