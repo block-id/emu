@@ -31,6 +31,7 @@ const AttributeGroup: React.FC<{group: AttributeGroup}> = ({ group }) => {
                               flexDirection: 'column',
                               alignItems: 'center',
                               gap: theme.spacing(0.8),
+                              flexBasis: '100%',
                             }
                           )}
                         >

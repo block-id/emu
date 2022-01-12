@@ -16,7 +16,7 @@ const IdCard: React.FC<IdCardProps> = ({ id }) => (
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
         alignItems: 'center',
       })}
     >

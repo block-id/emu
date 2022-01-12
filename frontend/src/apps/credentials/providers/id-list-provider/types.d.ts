@@ -1,7 +1,14 @@
 interface IdList {
-  data: undefined | {count: number, next: string | null, previous: string | null, results: Id[], },
+  data: undefined | {
+    count: number,
+    next: string | null,
+    previous: string | null,
+    results: Id[],
+    page_size: number
+  },
   isLoaded: boolean,
-  page: number
+  page: number,
+  query: string | null
 }
 
 type IdListProviderContext = [

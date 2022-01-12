@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Pagination } from '@mui/material';
+import { UsePaginationProps } from '@mui/material/usePagination';
 
 import IdListProvider, { useIdList } from 'apps/credentials/providers/id-list-provider/IdListProvider';
 import Toolbar from 'apps/credentials/components/toolbar/Toolbar';
@@ -7,6 +8,16 @@ import IdCard from 'apps/credentials/components/id-card/IdCard';
 
 const IdList: React.FC = () => {
   const [idList, setIdList] = useIdList();
+  const numPages = Math.ceil((idList.data?.count || 0) / (idList.data?.page_size || 1));
+
+  const handlePageChange: UsePaginationProps['onChange'] = (event, value) => {
+    setIdList({
+      ...idList,
+      page: value,
+      isLoaded: false,
+    });
+  };
+
   return (
     <Container sx={(theme) => ({
       maxWidth: 'lg',
@@ -30,10 +41,23 @@ const IdList: React.FC = () => {
           alignItems: 'center',
           marginTop: 2,
           width: '100%',
+          marginBottom: 2,
         }}
         >
           {idList.data?.results?.map((id) => <IdCard key={id.id} id={id} />)}
         </Box>
+        {numPages > 1
+        && (
+        <Box sx={{ marginBottom: 2 }}>
+          <Pagination
+            count={numPages}
+            onChange={handlePageChange}
+            page={idList.page}
+            color="primary"
+            size="large"
+          />
+        </Box>
+        )}
       </Box>
     </Container>
   );
