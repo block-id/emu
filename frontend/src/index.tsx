@@ -5,6 +5,7 @@ import { CssBaseline } from '@mui/material';
 
 import App from 'App';
 import { UserProvider } from 'common/providers/user-provider/UserProvider';
+import DialogProvider from 'common/providers/dialog-provider/DialogProvider';
 
 const theme = createTheme({
   components: {
@@ -23,10 +24,12 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <UserProvider>
-        <CssBaseline />
-        <App />
-      </UserProvider>
+      <DialogProvider>
+        <UserProvider>
+          <CssBaseline />
+          <App />
+        </UserProvider>
+      </DialogProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),

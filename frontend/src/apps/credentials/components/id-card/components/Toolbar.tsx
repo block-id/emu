@@ -8,11 +8,25 @@ import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+import { useDialog } from 'common/providers/dialog-provider/DialogProvider';
+
 dayjs.extend(relativeTime);
 
 const Toolbar: React.FC<{id: Id}> = ({ id }) => {
+  const { displayDialog } = useDialog();
+
   const verifiableId = id.verifiable_id;
   const addedOn = dayjs(id.created_at);
+
+  const handleDelete = () => {
+    displayDialog({
+      content: 'Do you want to delete this ID?',
+      agreeText: 'Yes',
+      disagreeText: 'No',
+      onAgree: (close) => close(),
+      onDisagree: (close) => close(),
+    });
+  };
 
   return (
     <Box
@@ -65,7 +79,7 @@ const Toolbar: React.FC<{id: Id}> = ({ id }) => {
           </IconButton>
         </Tooltip>
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>

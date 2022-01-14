@@ -18,6 +18,7 @@ type IdListProviderContext = [
 
 interface Id {
   id: number;
+  url: string;
   type: string;
   verifiable_id: VerifiableId;
   created_at: string;
