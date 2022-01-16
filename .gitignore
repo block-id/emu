@@ -5,3 +5,4 @@ staticfiles/
 node_modules/
 __pycache__
 backend/static/js/build/*
+testing_stuff
