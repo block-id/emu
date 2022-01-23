@@ -20,12 +20,10 @@ const App: React.FC = () => {
         <BrowserRouter>
           <Routes>
             {/* Guest Routes */}
-            {user === null && (
             <Route path="auth" element={<Auth />}>
               <Route index element={<Login />} />
               <Route path="register" element={<Register />} />
             </Route>
-            )}
 
             {/* User Routes */}
             {user && (
