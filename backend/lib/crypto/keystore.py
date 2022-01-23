@@ -11,10 +11,11 @@ from cryptography.hazmat.primitives.serialization import (
     PublicFormat,
     load_pem_private_key,
 )
+from cryptography.exceptions import InvalidSignature
 
 
 def _deserialize_bytes(string: str) -> bytes:
-    return bytes(bytearray.fromhex(string))
+    return bytes.fromhex(string)
 
 
 def _serialize_bytes(bites: bytes) -> str:
@@ -56,9 +57,17 @@ class KeyStore:
             _deserialize_bytes(key_pair[1]),
             _to_bytes(password) if password is not None else None,
         )
+        self._verify_keypair()
 
-    def sign(data):
-        pass
+    def _verify_keypair(self):
+        assert self.verify(b"test", self.sign(b"test")), "Key pairs don't matchP"
 
-    def verify(data):
-        pass
+    def sign(self, data: str) -> str:
+        return self._private_key.sign(_to_bytes(data)).hex()
+
+    def verify(self, data: str, hexSignature: str) -> bool:
+        try:
+            self._public_key.verify(_deserialize_bytes(hexSignature), _to_bytes(data))
+            return True
+        except InvalidSignature:
+            return False
