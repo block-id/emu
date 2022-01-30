@@ -60,7 +60,7 @@ class KeyStore:
         self._verify_keypair()
 
     def _verify_keypair(self):
-        assert self.verify(b"test", self.sign(b"test")), "Key pairs don't matchP"
+        assert self.verify("test", self.sign("test")), "Key pairs don't matchP"
 
     def sign(self, data: str) -> str:
         return self._private_key.sign(_to_bytes(data)).hex()
