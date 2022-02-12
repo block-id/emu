@@ -27,7 +27,11 @@ export default class IdService extends BaseService {
   ): Promise<AxiosResponse<VerifiablePresentation, any>> {
     return Axios.post(
       `${IDS_API_URL}${id}/create-vp/`,
-      params,
+      {
+        attribute_groups: params.attributeGroups,
+        entropy: params.entropy,
+        password: params.password,
+      },
       this.buildAxiosConfig(),
     );
   }
