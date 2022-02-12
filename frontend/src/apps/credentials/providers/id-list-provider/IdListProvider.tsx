@@ -3,7 +3,11 @@ import React, {
 } from 'react';
 
 import IdService from 'apps/credentials/services/IdService';
-import { getQueryParam, getAllParams, setQueryParams } from 'common/utils/queryParams';
+import {
+  getQueryParam,
+  getAllParams,
+  setQueryParams,
+} from 'common/utils/queryParams';
 
 const idService = new IdService();
 const IdContext = createContext<IdListProviderContext | undefined>(undefined);
@@ -14,6 +18,7 @@ const IdListProvider: React.FC = ({ children }) => {
     isLoaded: false,
     page: parseInt(getQueryParam('page') || '1'),
     query: getQueryParam('query'),
+    type: null,
   });
 
   useEffect(() => {
@@ -21,21 +26,26 @@ const IdListProvider: React.FC = ({ children }) => {
 
     let cancelLoad = false;
     // Fetch data
-    idService.listIds({
-      page: idList.page,
-      query: idList.query || '',
-    }).then((response) => {
-      if (cancelLoad) return;
-
-      setIdList({
-        data: response.data,
-        isLoaded: true,
+    idService
+      .listIds({
         page: idList.page,
-        query: idList.query,
+        query: idList.query || '',
+        type: idList.type || '',
+      })
+      .then((response) => {
+        if (cancelLoad) return;
+
+        setIdList({
+          data: response.data,
+          isLoaded: true,
+          page: idList.page,
+          query: idList.query,
+          type: idList.type,
+        });
+      })
+      .catch((error) => {
+        alert(`TODO: Handle exceptions! ${error.message}`);
       });
-    }).catch((error) => {
-      alert(`TODO: Handle exceptions! ${error.message}`);
-    });
 
     // Update query params
     setQueryParams({
@@ -44,13 +54,19 @@ const IdListProvider: React.FC = ({ children }) => {
       page: idList.page.toString(),
     });
 
-    return () => { cancelLoad = true; };
-  }, [idList.isLoaded, idList.page, idList.query]);
+    return () => {
+      cancelLoad = true;
+    };
+  }, [idList.isLoaded, idList.page, idList.query, idList.type]);
 
-  return <IdContext.Provider value={[idList, setIdList]}>{children}</IdContext.Provider>;
+  return (
+    <IdContext.Provider value={[idList, setIdList]}>
+      {children}
+    </IdContext.Provider>
+  );
 };
 
-const useIdList = ():IdListProviderContext => useContext(IdContext) as IdListProviderContext;
+const useIdList = (): IdListProviderContext => useContext(IdContext) as IdListProviderContext;
 
 export default IdListProvider;
 export { useIdList };

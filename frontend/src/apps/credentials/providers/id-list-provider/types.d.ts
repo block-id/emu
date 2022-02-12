@@ -8,7 +8,8 @@ interface IdList {
   },
   isLoaded: boolean,
   page: number,
-  query: string | null
+  query: string | null,
+  type: string | null,
 }
 
 type IdListProviderContext = [
