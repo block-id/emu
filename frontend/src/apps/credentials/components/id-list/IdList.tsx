@@ -51,7 +51,7 @@ const IdList: React.FC<IdListProps> = ({ showDelete, onClickId }) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          marginTop: 8,
+          marginTop: 2,
         }}
       >
         <Toolbar onSearch={handleSearch} />

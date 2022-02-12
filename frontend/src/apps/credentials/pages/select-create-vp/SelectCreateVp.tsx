@@ -7,6 +7,8 @@ import IdListProvider, {
 } from 'apps/credentials/providers/id-list-provider/IdListProvider';
 import IdListComponent from 'apps/credentials/components/id-list/IdList';
 import { getVpPayload } from 'apps/credentials/utils';
+import { Box } from '@mui/material';
+import VpAlert from 'apps/credentials/components/vp-alert/VpAlert';
 
 const SelectCreateVp: React.FC = () => {
   const type = getQueryParam('type');
@@ -30,7 +32,12 @@ const SelectCreateVp: React.FC = () => {
 
   if (!payload || !type) return <p>Invalid page request (make this error prettier)</p>;
 
-  return <IdListComponent showDelete={false} onClickId={onClickId} />;
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <VpAlert />
+      <IdListComponent showDelete={false} onClickId={onClickId} />
+    </Box>
+  );
 };
 
 const ListWrapper: React.FC = () => (
