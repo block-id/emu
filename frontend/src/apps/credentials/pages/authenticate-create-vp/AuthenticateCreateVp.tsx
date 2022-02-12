@@ -12,10 +12,26 @@ import { getVpPayload } from 'apps/credentials/utils';
 import FormikTextField from 'common/components/formik/FormikTextField';
 import ErrorMessage from 'common/components/formik/ErrorMessage';
 import VpAlert from 'apps/credentials/components/vp-alert/VpAlert';
+import IdService from 'apps/credentials/services/IdService';
 
+const idService = new IdService();
 const AuthenticateCreateVp: React.FC = () => {
   const payload = getVpPayload();
   const { id } = useParams();
+
+  const onSubmit = (password: string) => {
+    idService.createVp(Number.parseInt(id as string), {
+      ...(payload as VpRequestPayload),
+      password,
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('Handle error!');
+      });
+  };
 
   return (
     <>
@@ -47,9 +63,8 @@ const AuthenticateCreateVp: React.FC = () => {
               return errors;
             }}
             onSubmit={async (values) => {
-              console.log(`submit: ${values}`);
               try {
-                console.log('here');
+                onSubmit(values.password);
               } catch (error: any) {
                 // TODO: Replace with toast library
                 alert(`Error: ${error.message}`);
