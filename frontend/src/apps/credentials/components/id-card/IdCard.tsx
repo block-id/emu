@@ -4,7 +4,7 @@ import { Box, Paper } from '@mui/material';
 import Card from './components/card/Card';
 import Toolbar from './components/Toolbar';
 
-const IdCard: React.FC<IdCardProps> = ({ id }) => (
+const IdCard: React.FC<IdCardProps> = ({ id, showDelete }) => (
   <Paper
     sx={{
       width: '100%',
@@ -20,7 +20,7 @@ const IdCard: React.FC<IdCardProps> = ({ id }) => (
         alignItems: 'center',
       })}
     >
-      <Toolbar id={id} />
+      <Toolbar id={id} showDelete={showDelete} />
       <Card id={id.verifiable_id} />
     </Box>
   </Paper>

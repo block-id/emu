@@ -12,7 +12,7 @@ import { useDialog } from 'common/providers/dialog-provider/DialogProvider';
 
 dayjs.extend(relativeTime);
 
-const Toolbar: React.FC<{id: Id}> = ({ id }) => {
+const Toolbar: React.FC<{id: Id, showDelete?: boolean}> = ({ id, showDelete }) => {
   const { displayDialog } = useDialog();
 
   const verifiableId = id.verifiable_id;
@@ -50,14 +50,14 @@ const Toolbar: React.FC<{id: Id}> = ({ id }) => {
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: 'row',
             marginLeft: 1,
           }}
         >
           <Typography variant="h6">
             {`${verifiableId.issuer.name} / ${verifiableId.idName}`}
           </Typography>
-          <Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 1 }}>
             <Chip
               label={`Added: ${addedOn.fromNow()}`}
               variant="outlined"
@@ -73,16 +73,19 @@ const Toolbar: React.FC<{id: Id}> = ({ id }) => {
           alignItems: 'center',
         }}
       >
-        <Tooltip title="Create Verifiable Presentation">
+        {/* <Tooltip title="Create Verifiable Presentation">
           <IconButton>
             <HistoryEduIcon />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
+        {showDelete === true
+        && (
         <Tooltip title="Delete">
           <IconButton onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
+        )}
       </Box>
     </Box>
   );
