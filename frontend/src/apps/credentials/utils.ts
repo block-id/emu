@@ -1,9 +1,9 @@
 import { getQueryParam } from 'common/utils/queryParams';
 
-const getVpPayload = (): VpRequestPayload => {
+const getVpPayload = (): VpRequestPayload | null => {
   const payload = getQueryParam('payload');
-  if (!payload) throw Error('No payload found');
-  return JSON.parse(payload) as VpRequestPayload;
+  if (!payload) return null;
+  return JSON.parse(window.atob(payload)) as VpRequestPayload;
 };
 
 export { getVpPayload };

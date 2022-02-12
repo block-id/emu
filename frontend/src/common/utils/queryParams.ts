@@ -13,7 +13,7 @@ const setQueryParams = (params: {[key: string]: string | null | undefined}): voi
     },
   );
 
-  window.history.pushState(null, '', url);
+  window.history.replaceState(null, '', url);
 };
 
 export { getQueryParam, getAllParams, setQueryParams };

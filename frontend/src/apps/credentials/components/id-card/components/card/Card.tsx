@@ -2,23 +2,25 @@ import React from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
 import AttributeGroup from './AttributeGroup';
 
-const Card: React.FC<{id: VerifiableId}> = ({ id }) => (
+const Card: React.FC<{
+  id: VerifiableId;
+  highlightGroups?: string[];
+  cancelUnhighlightedGroups?: boolean;
+}> = ({ id, highlightGroups, cancelUnhighlightedGroups }) => (
   <Box
-    sx={(theme) => (
-      {
-        display: 'flex',
-        flexDirection: 'column',
-        border: `1px solid ${theme.palette.grey[200]}`,
-        marginTop: 2,
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-          width: '600px',
-          minHeight: '300px',
-        },
-      }
-    )}
+    sx={(theme) => ({
+      display: 'flex',
+      flexDirection: 'column',
+      border: `1px solid ${theme.palette.grey[200]}`,
+      marginTop: 2,
+      position: 'relative',
+      borderRadius: theme.shape.borderRadius,
+      width: '100%',
+      [theme.breakpoints.up('sm')]: {
+        width: '600px',
+        minHeight: '300px',
+      },
+    })}
   >
     <Box
       sx={{
@@ -53,37 +55,42 @@ const Card: React.FC<{id: VerifiableId}> = ({ id }) => (
       }}
     >
       <Box
-        sx={(theme) => (
-          {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderBottom: `1px solid ${theme.palette.grey[200]}`,
-            padding: theme.spacing(0.8),
-            background: theme.palette.grey[600],
-            color: theme.palette.getContrastText(theme.palette.grey[600]),
-            borderRadius: 'inherit',
-          }
-        )}
+        sx={(theme) => ({
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderBottom: `1px solid ${theme.palette.grey[200]}`,
+          padding: theme.spacing(0.8),
+          background: theme.palette.grey[600],
+          color: theme.palette.getContrastText(theme.palette.grey[600]),
+          borderRadius: 'inherit',
+        })}
       >
-        <Typography variant="body1" fontWeight="bold">{id.issuer.name}</Typography>
-        <Typography variant="body1" fontWeight="bold">{id.idName}</Typography>
+        <Typography variant="body1" fontWeight="bold">
+          {id.issuer.name}
+        </Typography>
+        <Typography variant="body1" fontWeight="bold">
+          {id.idName}
+        </Typography>
       </Box>
       <Box
-        sx={(theme) => (
-          {
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: theme.spacing(1),
-            padding: theme.spacing(2),
-          }
-        )}
+        sx={(theme) => ({
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: theme.spacing(1),
+          padding: theme.spacing(2),
+        })}
       >
         {id.groups.map((group) => (
           <AttributeGroup
             key={group.data.groupName}
             group={group}
+            cancel={
+              cancelUnhighlightedGroups
+              && highlightGroups
+              && !highlightGroups.includes(group.data.groupName)
+            }
           />
         ))}
       </Box>

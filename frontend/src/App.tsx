@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter, Routes, Route, Navigate,
+  BrowserRouter, Routes, Route, Navigate, Outlet,
 } from 'react-router-dom';
 
 import Auth from 'apps/auth/Auth';
@@ -11,6 +11,7 @@ import Register from 'apps/auth/pages/register/Register';
 import Loader from 'common/components/loader/Loader';
 import IdList from 'apps/credentials/pages/id-list/IdList';
 import SelectCreateVp from 'apps/credentials/pages/select-create-vp/SelectCreateVp';
+import CreateVp from 'apps/credentials/pages/create-vp/CreateVp';
 
 const App: React.FC = () => {
   const [user] = useUser();
@@ -32,7 +33,10 @@ const App: React.FC = () => {
             <Route path="ids" element={<Credentials />}>
               <Route index element={<IdList />} />
             </Route>
-            <Route path="create-vp" element={<SelectCreateVp />} />
+            <Route path="create-vp" element={<Outlet />}>
+              <Route index element={<SelectCreateVp />} />
+              <Route path=":id" element={<CreateVp />} />
+            </Route>
           </>
         )}
 

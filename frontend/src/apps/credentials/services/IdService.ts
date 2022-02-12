@@ -16,4 +16,8 @@ export default class IdService extends BaseService {
   async deleteId(url: string): Promise<AxiosResponse<any, any>> {
     return Axios.delete(url, this.getDefaultAxiosConfig());
   }
+
+  async getId(id: number): Promise<AxiosResponse<Id, any>> {
+    return Axios.get(`${IDS_API_URL}${id}/`, this.getDefaultAxiosConfig());
+  }
 }
