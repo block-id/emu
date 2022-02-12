@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import {
   Box, Button, Container, Typography,
 } from '@mui/material';
@@ -30,6 +30,11 @@ const CreateVp: React.FC = () => {
   const navigate = useNavigate();
   const onCancel = () => {
     navigate('/');
+  };
+
+  const { search } = useLocation();
+  const onSubmit = () => {
+    navigate(`authenticate${search}`);
   };
 
   return (
@@ -76,6 +81,7 @@ const CreateVp: React.FC = () => {
                 endIcon={<SendIcon fontSize="small" />}
                 variant="contained"
                 color="success"
+                onClick={onSubmit}
               >
                 Send ID to {payload.requesterName}
               </Button>

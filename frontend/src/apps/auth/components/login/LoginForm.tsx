@@ -25,7 +25,7 @@ const LoginForm: React.FC = () => {
           errors.username = 'Username is required';
         }
 
-        if (values.username.trim().length <= 0) {
+        if (values.password.trim().length <= 0) {
           errors.password = 'Password is required';
         }
 
