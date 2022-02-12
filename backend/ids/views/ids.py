@@ -38,6 +38,9 @@ class IdViewset(
                 qs = qs.filter(
                     Q(id_name__icontains=query) | Q(issuer_name__icontains=query)
                 )
+            type = self.request.GET.get("type")
+            if type:
+                qs = qs.filter(Q(type=type))
             qs = qs.order_by("-id")
 
         return qs
