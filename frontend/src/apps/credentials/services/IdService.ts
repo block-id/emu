@@ -4,6 +4,10 @@ import { IDS_API_URL } from 'common/constants';
 import BaseService from 'common/services/BaseService';
 
 export default class IdService extends BaseService {
+  async createId(id: VerifiableId): Promise<AxiosResponse<Id, any>> {
+    return Axios.post(IDS_API_URL, { json: id }, this.getDefaultAxiosConfig());
+  }
+
   async listIds(params: {
     page?: number;
     page_size?: number;

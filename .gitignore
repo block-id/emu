@@ -7,3 +7,4 @@ __pycache__
 backend/static/js/build/*
 testing_stuff
 ._*
+dummy-api

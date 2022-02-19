@@ -13,6 +13,7 @@ import IdList from 'apps/credentials/pages/id-list/IdList';
 import SelectCreateVp from 'apps/credentials/pages/select-create-vp/SelectCreateVp';
 import CreateVp from 'apps/credentials/pages/create-vp/CreateVp';
 import AuthenticateCreateVp from 'apps/credentials/pages/authenticate-create-vp/AuthenticateCreateVp';
+import NewId from 'apps/credentials/pages/new-id/NewId';
 
 const App: React.FC = () => {
   const [user] = useUser();
@@ -39,6 +40,7 @@ const App: React.FC = () => {
               <Route path=":id" element={<CreateVp />} />
               <Route path=":id/authenticate" element={<AuthenticateCreateVp />} />
             </Route>
+            <Route path="new-id" element={<NewId />} />
           </>
         )}
 
