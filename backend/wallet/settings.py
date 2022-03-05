@@ -127,3 +127,9 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ]
 }
+
+# Web3 config
+
+WEB3_HTTP_PROVIDER = "http://127.0.0.1:7545"
+ISSUER_CONTRACT_ADDRESS = "0xb4ec0AB3d885EC2B0b716F01a0162c815d6f39eB"
+ISSUER_CONTRACT_ABI = BASE_DIR / "resources/abi/IssuersContract.json"

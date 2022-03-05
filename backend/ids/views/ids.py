@@ -15,6 +15,7 @@ from ids.models import Id
 from ids.serializers.id.create import IdCreateSerializer
 from ids.serializers.id.list import IdListSerializer
 from ids.actions import create_verifiable_presentation
+from ids.utils import verify_json_id
 from lib.json_ids.validate import validate_json_id
 from lib.drf.pagination import DefaultPageNumberPagination
 
@@ -67,7 +68,11 @@ class IdViewset(
         except (AssertionError, ValueError) as e:
             raise ValidationError(str(e))
 
-        # TODO: Add smart contract validation
+        # ID signature verification    
+        try:
+            verify_json_id(json_id)
+        except AssertionError as e:
+            raise ValidationError(str(e))    
 
         # Create ID
         serializer = self.get_serializer(

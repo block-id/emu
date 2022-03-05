@@ -8,6 +8,7 @@ from .schema import json_id_schema
 def validate_semantics(json):
     ISSUER_PUBLIC_KEY = json["data"]["issuer"]["publicKey"]
     SUBJECT_PUBLIC_KEY = json["data"]["groups"][0]["data"]["subject"]["publicKey"]
+    ID_TYPE = json["data"]["idType"]
 
     # Validate attribute groups
     for group in json["data"]["groups"]:
@@ -18,6 +19,11 @@ def validate_semantics(json):
         assert (
             group["data"]["subject"]["publicKey"] == SUBJECT_PUBLIC_KEY
         ), "Subject public key mismatch"
+
+        # ID type validation
+        assert (
+            group["data"]["idType"] == ID_TYPE
+        ), f"Attribute group {group['groupName']} idType mismatch"
 
         # Datetime validation
         issued_at = group["data"]["issuedAt"]

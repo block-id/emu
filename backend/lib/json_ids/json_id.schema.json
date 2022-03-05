@@ -47,6 +47,7 @@
           "additionalProperties": false,
           "properties": {
             "groupName": { "type": "string" },
+            "idType": {"type": "string"},
             "attributes": {
               "type": "object",
               "additionalProperties": false,
@@ -83,7 +84,8 @@
             "subject",
             "issuer",
             "issuedAt",
-            "expiresAt"
+            "expiresAt",
+            "idType"
           ]
         },
         "signature": { "type": "string" }
