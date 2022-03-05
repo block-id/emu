@@ -6,11 +6,11 @@ from .schema import json_id_schema
 
 
 def validate_semantics(json):
-    ISSUER_PUBLIC_KEY = json["issuer"]["publicKey"]
-    SUBJECT_PUBLIC_KEY = json["groups"][0]["data"]["subject"]["publicKey"]
+    ISSUER_PUBLIC_KEY = json["data"]["issuer"]["publicKey"]
+    SUBJECT_PUBLIC_KEY = json["data"]["groups"][0]["data"]["subject"]["publicKey"]
 
     # Validate attribute groups
-    for group in json["groups"]:
+    for group in json["data"]["groups"]:
         # Key validation
         assert (
             group["data"]["issuer"]["publicKey"] == ISSUER_PUBLIC_KEY
@@ -36,4 +36,3 @@ def validate_json_id(json):
     # Validate schema
     validate(instance=json, schema=json_id_schema)
     validate_semantics(json)
-    # TODO: Validate signature

@@ -73,9 +73,9 @@ class IdViewset(
         serializer = self.get_serializer(
             data={
                 "owner": request.user.id,
-                "type": json_id["idType"],
-                "issuer_name": json_id["issuer"]["name"],
-                "id_name": json_id["idName"],
+                "type": json_id["data"]["idType"],
+                "issuer_name": json_id["data"]["issuer"]["name"],
+                "id_name": json_id["data"]["idName"],
                 "verifiable_id": json_id,
             }
         )
