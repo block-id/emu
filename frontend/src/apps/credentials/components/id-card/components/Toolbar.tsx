@@ -4,7 +4,6 @@ import {
   Box, Chip, IconButton, Tooltip, Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
@@ -44,7 +43,7 @@ const Toolbar: React.FC<{id: Id, showDelete?: boolean}> = ({ id, showDelete }) =
         }}
       >
         <Avatar
-          src={verifiableId.issuer.logo}
+          src={verifiableId.data.issuer.logo}
           sx={{ width: 50, height: 50 }}
         />
         <Box
@@ -55,7 +54,7 @@ const Toolbar: React.FC<{id: Id, showDelete?: boolean}> = ({ id, showDelete }) =
           }}
         >
           <Typography variant="h6">
-            {`${verifiableId.issuer.name} / ${verifiableId.idName}`}
+            {`${verifiableId.data.issuer.name} / ${verifiableId.data.idName}`}
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 1 }}>
             <Chip

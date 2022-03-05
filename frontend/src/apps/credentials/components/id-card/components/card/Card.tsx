@@ -37,7 +37,7 @@ const Card: React.FC<{
       }}
     >
       <Avatar
-        src={id.issuer.logo}
+        src={id.data.issuer.logo}
         alt="Issuer logo"
         sx={{
           width: 150,
@@ -68,10 +68,10 @@ const Card: React.FC<{
         })}
       >
         <Typography variant="body1" fontWeight="bold">
-          {id.issuer.name}
+          {id.data.issuer.name}
         </Typography>
         <Typography variant="body1" fontWeight="bold">
-          {id.idName}
+          {id.data.idName}
         </Typography>
       </Box>
       <Box
@@ -82,7 +82,7 @@ const Card: React.FC<{
           padding: theme.spacing(2),
         })}
       >
-        {id.groups.map((group) => (
+        {id.data.groups.map((group) => (
           <AttributeGroup
             key={group.data.groupName}
             group={group}

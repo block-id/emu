@@ -27,14 +27,17 @@ interface Id {
 }
 
 interface VerifiableId {
-  idType: string;
-  idName: string;
-  issuer: {
-    name: string;
-    publicKey: string;
-    logo: string;
-  },
-  groups: AttributeGroup[],
+  data: {
+    idType: string;
+    idName: string;
+    issuer: {
+      name: string;
+      publicKey: string;
+      logo: string;
+    },
+    groups: AttributeGroup[],
+  };
+  signature: string;
 }
 
 interface AttributeGroup {

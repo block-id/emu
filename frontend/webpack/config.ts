@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
-// import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const config: webpack.Configuration = {
   devtool: 'source-map',
@@ -41,12 +41,12 @@ const config: webpack.Configuration = {
   },
 
   plugins: [
-    // new ForkTsCheckerWebpackPlugin({
-    //   async: false,
-    //   eslint: {
-    //     files: "./src/**/*",
-    //   },
-    // }),
+    new ForkTsCheckerWebpackPlugin({
+      async: false,
+      // eslint: {
+      //   files: "./src/**/*",
+      // },
+    }),
   ],
 };
 
