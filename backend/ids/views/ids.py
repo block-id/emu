@@ -1,13 +1,11 @@
 import json
-from multiprocessing import AuthenticationError
-from django.http import HttpResponse
+
 from django.http.response import JsonResponse
 from django.db.models import Q
 from django.contrib.auth import authenticate
-
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError, AuthenticationFailed
 from rest_framework.decorators import action
 from jsonschema.exceptions import ValidationError as JsonValidationError
 
@@ -101,7 +99,7 @@ class IdViewset(
         entropy = request.data.get("entropy", "")
 
         if not authenticate(request, username=request.user.username, password=password):
-            raise AuthenticationError("Invalid password")
+            raise AuthenticationFailed("Invalid password")
 
         presentation = create_verifiable_presentation(
             id,

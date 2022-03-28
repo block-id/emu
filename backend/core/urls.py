@@ -26,6 +26,11 @@ urlpatterns = [
         views.user.CurrentUserView.as_view(),
         name="current-user",
     ),
+    path(
+        "api/sign/",
+        views.sign.SignView.as_view(),
+        name="sign",
+    ),
     re_path("api/.*", views.errors.http_404, name="default-api"),
     re_path(".*", views.react.react, name="spa"),
 ]
