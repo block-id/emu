@@ -48,11 +48,15 @@ def create_keypair(password: str) -> typing.Tuple[str, str]:
 
 class KeyStore:
     def __init__(
-        self, key_pair: typing.Tuple[str, str], password: typing.Optional[str]
+        self, key_pair: typing.Tuple[str, typing.Optional[str]], password: typing.Optional[str]
     ):
         self._public_key = Ed25519PublicKey.from_public_bytes(
             _deserialize_bytes(key_pair[0])
         )
+
+        if key_pair[1] is None:
+            return
+
         self._private_key = load_pem_private_key(
             _deserialize_bytes(key_pair[1]),
             _to_bytes(password) if password is not None else None,
