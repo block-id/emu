@@ -61,7 +61,7 @@ const App: React.FC = () => {
 
         {/* Redirects */}
         {user && <Route path="" element={<Navigate to="ids" />} />}
-        {user === null && <Route path="" element={<Navigate to="auth" />} />}
+        {user === null && <Route path="*" element={<Navigate to="auth" />} />}
       </Routes>
     </BrowserRouter>
   );
