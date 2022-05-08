@@ -23,4 +23,4 @@ def verify_json_id(json_id: typing.Any):
             group["data"],
             group["signature"],
             json_id["data"]["idType"],
-        ), f"Invalid attribute group signature for {group['groupName']}"
+        ), f"Invalid attribute group signature for {group['data']['groupName']}"
