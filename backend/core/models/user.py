@@ -3,4 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    pass
+    @property
+    def public_key(self):
+        return self.keypair.public_key

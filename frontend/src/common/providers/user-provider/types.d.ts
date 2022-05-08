@@ -5,4 +5,5 @@ type UserContext = [
 
 interface IUser {
   username: string;
+  public_key: string;
 }

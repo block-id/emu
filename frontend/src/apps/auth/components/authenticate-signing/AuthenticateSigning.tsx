@@ -13,7 +13,7 @@ const AuthenticateSigning: React.FC = () => {
     try {
       const response = await authService.sign(payload, password);
       const { sign, publicKey } = response.data;
-      window.location.href = `${redirect}?sign=${sign}&publicKey=${publicKey}`;
+      window.location.assign(`${redirect}?sign=${sign}&publicKey=${publicKey}`);
     } catch (e: any) {
       alert(`Could not sign message: ${e.message} ${e.response?.data?.toString()}`);
     }

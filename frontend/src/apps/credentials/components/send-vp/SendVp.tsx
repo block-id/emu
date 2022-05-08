@@ -6,16 +6,23 @@ import {
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import Card from 'apps/credentials/components/id-card/components/card/Card';
+import { useUser } from 'common/providers/user-provider/UserProvider';
 
 const SendVp: React.FC<{ sendTo: string; vp: VerifiablePresentation }> = ({
   sendTo,
   vp,
 }) => {
+  const [user] = useUser();
+
   const [sending, setSending] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+
   useEffect(() => {
     if (sending) {
-      Axios.post(sendTo as string, vp)
+      Axios.post(
+        sendTo as string,
+        vp, { params: { public_key: user.public_key } },
+      )
         .then((response) => {
           setSending(false);
         })
