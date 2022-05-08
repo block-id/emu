@@ -37,7 +37,7 @@ const SendVp: React.FC<{ sendTo: string; vp: VerifiablePresentation }> = ({
         gap: 2,
       }}
     >
-      <Card id={vp.data} />
+      <Card id={vp.data.id} />
       {sending && (
         <Box
           sx={{

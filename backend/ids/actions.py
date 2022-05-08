@@ -21,16 +21,18 @@ def create_verifiable_presentation(
     )
 
     # Get the required attr groups
-    result = {}
+    result = {
+        "id": {}
+    }
     for attr in ["idType", "idName", "issuer"]:
-        val = id.verifiable_id.get(attr, "")
-        result[attr] = deepcopy(val)
+        val = id.verifiable_id["data"].get(attr, "")
+        result["id"][attr] = deepcopy(val)
 
-    result["groups"] = []
-    for group in id.verifiable_id["groups"]:
+    result["id"]["groups"] = []
+    for group in id.verifiable_id["data"]["groups"]:
         group_name = group["data"]["groupName"]
         if group_name in attribute_groups:
-            result["groups"].append(deepcopy(group))
+            result["id"]["groups"].append(deepcopy(group))
 
     result["entropy"] = uuid.uuid4().hex + "-" + entropy
 

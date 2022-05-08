@@ -5,8 +5,9 @@ interface VpRequestPayload {
   entropy: string,
 }
 
-interface VerifiablePresentationData extends VerifiableId {
-  entropy: string,
+interface VerifiablePresentationData {
+  entropy: string;
+  id: VerifiableId['data'];
 }
 
 interface VerifiablePresentation {

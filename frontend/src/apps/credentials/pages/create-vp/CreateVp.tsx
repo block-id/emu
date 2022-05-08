@@ -61,7 +61,7 @@ const CreateVp: React.FC = () => {
             }}
           >
             <Card
-              id={credential.verifiable_id}
+              id={credential.verifiable_id.data}
               highlightGroups={payload.attributeGroups}
               cancelUnhighlightedGroups
             />

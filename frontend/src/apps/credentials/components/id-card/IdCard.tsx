@@ -21,7 +21,7 @@ const IdCard: React.FC<IdCardProps> = ({ id, showDelete }) => (
       })}
     >
       <Toolbar id={id} showDelete={showDelete} />
-      <Card id={id.verifiable_id} />
+      <Card id={id.verifiable_id.data} />
     </Box>
   </Paper>
 );

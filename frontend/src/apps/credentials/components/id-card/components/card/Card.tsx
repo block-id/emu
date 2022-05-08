@@ -3,7 +3,7 @@ import { Avatar, Box, Typography } from '@mui/material';
 import AttributeGroup from './AttributeGroup';
 
 const Card: React.FC<{
-  id: VerifiableId;
+  id: VerifiableId['data'];
   highlightGroups?: string[];
   cancelUnhighlightedGroups?: boolean;
 }> = ({ id, highlightGroups, cancelUnhighlightedGroups }) => (
@@ -37,7 +37,7 @@ const Card: React.FC<{
       }}
     >
       <Avatar
-        src={id.data.issuer.logo}
+        src={id.issuer.logo}
         alt="Issuer logo"
         sx={{
           width: 150,
@@ -68,10 +68,10 @@ const Card: React.FC<{
         })}
       >
         <Typography variant="body1" fontWeight="bold">
-          {id.data.issuer.name}
+          {id.issuer.name}
         </Typography>
         <Typography variant="body1" fontWeight="bold">
-          {id.data.idName}
+          {id.idName}
         </Typography>
       </Box>
       <Box
@@ -82,7 +82,7 @@ const Card: React.FC<{
           padding: theme.spacing(2),
         })}
       >
-        {id.data.groups.map((group) => (
+        {id.groups.map((group) => (
           <AttributeGroup
             key={group.data.groupName}
             group={group}

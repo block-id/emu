@@ -78,7 +78,7 @@ const NewId: React.FC = () => {
                   }}
                 >
                   {id
-                && <Card id={id} />}
+                && <Card id={id.data} />}
                   <Typography variant="body1">
                     Do you want to add this ID to your wallet?
                   </Typography>
