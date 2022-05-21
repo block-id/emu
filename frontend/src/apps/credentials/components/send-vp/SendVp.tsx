@@ -25,6 +25,9 @@ const SendVp: React.FC<{ sendTo: string; vp: VerifiablePresentation }> = ({
       )
         .then((response) => {
           setSending(false);
+          if (response.data?.redirectUrl) {
+            window.location.assign(response.data.redirectUrl);
+          }
         })
         .catch((err) => {
           setSending(false);
