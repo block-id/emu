@@ -39,8 +39,8 @@ const DialogProvider: React.FC = ({ children }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onDisagree ? () => onDisagree(handleClose) : handleClose}>{agreeText}</Button>
-          <Button onClick={onAgree ? () => onAgree(handleClose) : handleClose}>{disagreeText}</Button>
+          <Button onClick={onDisagree ? () => onDisagree(handleClose) : handleClose}>{disagreeText}</Button>
+          <Button onClick={onAgree ? () => onAgree(handleClose) : handleClose}>{agreeText}</Button>
         </DialogActions>
       </Dialog>
       {children}
